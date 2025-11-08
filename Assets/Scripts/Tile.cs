@@ -3,9 +3,15 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    public Vector2 gridPos;
+    public Vector2Int gridPos;
+    public Vector2 worldPos;
     public bool isWall;
     public List<TileObject> heldObjects = new();
+    
+    public void Initialize()
+    {
+        transform.localPosition = worldPos;
+    }
 
     public void AddObject(TileObject newObject)
     {
