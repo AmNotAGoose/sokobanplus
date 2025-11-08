@@ -5,7 +5,7 @@ public class Tile : MonoBehaviour
 {
     public Vector2Int gridPos;
     public bool isWall;
-    public List<TileObject> heldObjects = new List<TileObject>();
+    public List<TileObject> heldObjects = new();
 
     public void AddObject(TileObject newObject)
     {
@@ -15,6 +15,8 @@ public class Tile : MonoBehaviour
 
     public void Evaluate(string command)
     {
+        if (heldObjects.Count == 0) return;
+
         int result = 0;
         foreach (TileObject obj in heldObjects)
         {
