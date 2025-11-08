@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    public Vector2Int gridPos;
+    public Vector2 gridPos;
     public bool isWall;
     public List<TileObject> heldObjects = new();
 
@@ -12,7 +12,7 @@ public class Tile : MonoBehaviour
         heldObjects.Add(newObject);
         heldObjects.Sort((x, y) => x.order.CompareTo(y.order));
     }
-
+    
     public void Evaluate(string command)
     {
         if (heldObjects.Count == 0) return;
