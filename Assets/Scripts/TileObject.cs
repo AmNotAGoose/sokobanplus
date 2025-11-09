@@ -7,6 +7,9 @@ public abstract class TileObject : MonoBehaviour
     public int order;
     public int renderOrder;
 
+    public bool solid;
+    public bool pushable;
+
     public void Initialize()
     {
         transform.localPosition = Vector2.zero;

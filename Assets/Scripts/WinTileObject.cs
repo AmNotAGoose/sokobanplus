@@ -5,6 +5,12 @@ public class WinTileObject : TileObject
     public int targetValue;
     public bool isWon;
 
+    private void Awake()
+    {
+        solid = false;
+        pushable = false;
+    }
+
     public override int OnCommand(string command, int prev)
     {
         if (prev == targetValue)

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Level : MonoBehaviour
 {
     public string levelString;
-    
+
     public int width;
     public int height;
     public Tile[,] grid;
@@ -24,7 +24,7 @@ public class Level : MonoBehaviour
 
         if (width == 0 || height == 0) return;
         grid = new Tile[width, height];
-        
+
         for (int i = 0; i < grid.GetLength(0); i++)
         {
             for (int j = 0; j < grid.GetLength(1); j++)
@@ -33,7 +33,7 @@ public class Level : MonoBehaviour
                 Vector3 localPos = origin + new Vector3(i, j, 0f) * (1f + tileSpacing);
 
                 GameObject curTileGO = Instantiate(tilePrefab, gridParent);
-                
+
                 Tile curTile = curTileGO.GetComponent<Tile>();
                 curTile.gridPos = new Vector2Int(i, j);
                 curTile.worldPos = localPos;
@@ -58,7 +58,7 @@ public class Level : MonoBehaviour
                 case "win":
                     tileObject = objGO.AddComponent<WinTileObject>();
                     tileObject.type = "win";
-                    winConditions.Add((WinTileObject) tileObject); 
+                    winConditions.Add((WinTileObject)tileObject);
                     break;
                 default:
                     print("something BROKEN");
@@ -86,5 +86,45 @@ public class Level : MonoBehaviour
     public bool CheckIfWon()
     {
         return winConditions.All(w => w.isWon);
+    }
+
+    public bool InGridBounds(Vector2Int selectedPos)
+    {
+        return selectedPos.x >= 0 && selectedPos.y >= 0 && selectedPos.x <= grid.GetLength(0) && selectedPos.y <= grid.GetLength(1);
+    }
+
+    public void MoveObject(TileObject tileObj, Vector2Int direction)
+    {
+        Vector2Int curGridPos = tileObj.gridPos;
+        
+        bool canMove = false;
+        bool hasEmptySpace = false;
+        List<Tile> selectedTiles = new();
+        Vector2Int selectedPos = curGridPos;
+        while (selectedPos != null)
+        {
+            if (!InGridBounds(selectedPos)) break;
+
+            Tile selectedTile = grid[selectedPos.x, selectedPos.y];
+            if (selectedTile.stopper) break;
+            if (!selectedTile.solid)
+            {
+                hasEmptySpace = true;
+                break;
+            }
+
+            selectedTiles.Add(selectedTile);
+            selectedPos += direction;
+        }
+
+        if (!hasEmptySpace) return;
+        if (!canMove) return;
+
+        foreach (Tile curTile in selectedTiles)
+        {
+            List<TileObject> curTileObjects = curTile.PopObjects(HeldObjectsFiltering.Pushable);
+            Vector2Int nextTile = curTile.gridPos + direction;
+            grid[nextTile.x, nextTile.y].AddObjects(curTileObjects);
+        }
     }
 }
