@@ -567,14 +567,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c9d3dbea79f74047b4be259e8d69c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelString: 4|8=|player-0,0|win-2,3|numberbox-1,2|wall-2,4
+  levelString: 4|8=|player-0,0|win-2,3,40|numberbox-1,2,30|wall-2,4|operationbox-2,7,+,10
   width: 0
   height: 1
   winConditions: []
   gridParent: {fileID: 1957223374}
   tileSpacing: 0
   tilePrefab: {fileID: 8660602319308725020, guid: 16a6caad6d11935429607ef031418746, type: 3}
-  tileObjectPrefab: {fileID: 0}
   tileObjectPrefabs:
   - id: wall
     tileObject: {fileID: 833048764758992204, guid: 15aee8d5884818a449daab41af8833ca, type: 3}
@@ -584,6 +583,8 @@ MonoBehaviour:
     tileObject: {fileID: 9038720850224596792, guid: 75585bcc25b93a94e911858a0abcffc1, type: 3}
   - id: win
     tileObject: {fileID: 6110248716113892907, guid: d95beaf09a9130a46ae223df8fdb4bf9, type: 3}
+  - id: operationbox
+    tileObject: {fileID: 5340509799220415109, guid: 030cb45448718c64a8669d1f6b48072a, type: 3}
 --- !u!4 &1005967559
 Transform:
   m_ObjectHideFlags: 0

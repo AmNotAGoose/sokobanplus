@@ -21,7 +21,6 @@ public class Level : MonoBehaviour
     public Transform gridParent;
     public float tileSpacing = 0f;
     public GameObject tilePrefab;
-    public GameObject tileObjectPrefab;
     public List<TileObjectPrefab> tileObjectPrefabs;
 
     void Start()
@@ -60,7 +59,7 @@ public class Level : MonoBehaviour
 
             tileObject.gridPos = new Vector2Int(gridObject.x, gridObject.y);
             grid[gridObject.x, gridObject.y].AddObject(tileObject);
-            tileObject.Initialize();
+            tileObject.Initialize(gridObject.options);
         }
 
         Camera cam = Camera.main;

@@ -16,12 +16,12 @@ public class GridParser
         public string type;
         public int x;
         public int y;
+        public List<string> options;
     }
 
     /// <summary>
-    /// Parses a string in the format:
-    /// width|height=|type-x,y|type-x,y|...
-    /// Example: 4|8=|player-0,0|win-2,3|numberbox-1,2|wall-0,1
+    /// Format: width|height=|type-x,y[,option1,option2,...]|...
+    /// Example: 4|8=|player-0,0,speed,blue|wall-1,1|box-2,3,heavy
     /// </summary>
     public static ParsedGrid ParseGridString(string data)
     {
@@ -46,14 +46,26 @@ public class GridParser
             if (typeAndPos.Length != 2) continue;
 
             string type = typeAndPos[0];
-            string[] xy = typeAndPos[1].Split(',');
-            if (xy.Length != 2) continue;
+            string[] parts = typeAndPos[1].Split(',');
+            if (parts.Length < 2) continue;
+
+            int x = int.Parse(parts[0]);
+            int y = int.Parse(parts[1]);
+
+            // all remaining commas = options
+            List<string> options = new List<string>();
+            if (parts.Length > 2)
+            {
+                for (int i = 2; i < parts.Length; i++)
+                    options.Add(parts[i]);
+            }
 
             parsed.objects.Add(new GridObject
             {
                 type = type,
-                x = int.Parse(xy[0]),
-                y = int.Parse(xy[1])
+                x = x,
+                y = y,
+                options = options
             });
         }
 

@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -6,18 +8,21 @@ public abstract class TileObject : MonoBehaviour
 {
     SpriteRenderer spriteRenderer;
 
+    public List<string> options;
+
     public Vector2Int gridPos;
     public string type;
     public int order;
-    public int renderOrder;
+    public int renderOrder; 
 
     public bool solid;
     public bool pushable;
 
     public bool moving;
 
-    public void Initialize()
+    public void Initialize(List<string> _options)
     {
+        options = _options;
         spriteRenderer = GetComponent<SpriteRenderer>();
         transform.localPosition = Vector2.zero;
         spriteRenderer.sortingOrder = renderOrder;
@@ -47,6 +52,6 @@ public abstract class TileObject : MonoBehaviour
 
         transform.localPosition = endPos;
     }
-    public abstract int OnCommand(string command, int prev);
-    public abstract void OnCommandFinished(int newValue);
+    public abstract float OnCommand(string command, float prev);
+    public abstract void OnCommandFinished(float newValue);
 }

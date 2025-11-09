@@ -4,13 +4,15 @@ public class WinTileObject : TileObject
 {
     Level level;
 
-    public int targetValue;
+    public float targetValue; // options 0
     public bool isWon;
 
     private void Awake()
     {
         level = FindObjectsByType<Level>(FindObjectsSortMode.None)[0];
         level.winConditions.Add(this);
+
+        targetValue = float.Parse(options[0]);
 
         type = "win";
         solid = false;
@@ -20,9 +22,9 @@ public class WinTileObject : TileObject
         renderOrder = 30;
     }
 
-    public override int OnCommand(string command, int prev) { return prev; }
+    public override float OnCommand(string command, float prev) { return prev; }
 
-    public override void OnCommandFinished(int newValue)
+    public override void OnCommandFinished(float newValue)
     {
         isWon = newValue == targetValue;
     }

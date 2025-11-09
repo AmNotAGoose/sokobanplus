@@ -63,6 +63,6 @@ public class Player : TileObject
         canMove = true;
     }
 
-    public override int OnCommand(string command, int prev) { return prev; }
-    public override void OnCommandFinished(int newValue) { }
+    public override float OnCommand(string command, float prev) { return prev; }
+    public override void OnCommandFinished(float newValue) { }
 }

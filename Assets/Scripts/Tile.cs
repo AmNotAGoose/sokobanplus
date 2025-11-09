@@ -69,7 +69,7 @@ public class Tile : MonoBehaviour
         if (heldObjects.Count == 0) return;
         heldObjects.Sort((x, y) => x.order.CompareTo(y.order)); // asc!!!
 
-        int result = 0;
+        float result = 0;
         foreach (TileObject obj in heldObjects)
         {
             result = obj.OnCommand(command, result);

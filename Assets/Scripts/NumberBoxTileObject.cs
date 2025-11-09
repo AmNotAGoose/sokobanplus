@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class NumberBoxTileObject : TileObject
 {
-    public int value;
+    public float value; // options 0
 
     private void Awake()
     {
@@ -11,12 +11,14 @@ public class NumberBoxTileObject : TileObject
         solid = true;
         pushable = true;
 
+        value = float.Parse(options[0]);
+
         order = 20;
         renderOrder = 20;
     }
 
-    public override int OnCommand(string command, int prev) { return prev; }
-    public override void OnCommandFinished(int newValue)
+    public override float OnCommand(string command, float prev) { return prev; }
+    public override void OnCommandFinished(float newValue)
     {
         value = newValue;
     }
