@@ -5,13 +5,15 @@ public class PlayerCommands : MonoBehaviour
 {
     public TextMeshProUGUI commandText;
 
-    public void ClearText()
+    public string GetAndClearText()
     {
-        commandText.text = "";
+        string curText = commandText.text;
+        commandText.SetText("");
+        return curText;
     }
 
     public void AddText(string additionalText)
     {
-        commandText.text += additionalText;
+        commandText.SetText(commandText.text + additionalText);
     }
 }

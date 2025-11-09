@@ -13,13 +13,12 @@ public class Player : TileObject
 
     private void Awake()
     {
-        playerCommands = transform.AddComponent<PlayerCommands>();
         level = FindObjectsByType<Level>(FindObjectsSortMode.None)[0];
 
         type = "player";
         solid = true;
         pushable = true;
-
+                
         order = 10;
         renderOrder = 20;
     }
@@ -29,7 +28,7 @@ public class Player : TileObject
         typing = Input.GetKey(KeyCode.LeftShift);
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            playerCommands.ClearText();
+            level.EvaluateCommand(playerCommands.GetAndClearText());
         }
 
         if (typing)

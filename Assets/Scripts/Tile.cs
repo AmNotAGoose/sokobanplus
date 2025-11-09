@@ -33,7 +33,6 @@ public class Tile : MonoBehaviour
     {
         foreach (TileObject tileObject in tileObjects)
         {
-            print(tileObject);
             AddObject(tileObject);
         }
     }
