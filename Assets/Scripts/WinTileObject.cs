@@ -9,6 +9,7 @@ public class WinTileObject : TileObject
     {
         solid = false;
         pushable = false;
+        renderOrder = 30;
     }
 
     public override int OnCommand(string command, int prev)

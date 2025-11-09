@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum HeldObjectsFiltering
@@ -23,20 +24,21 @@ public class Tile : MonoBehaviour
         transform.localPosition = worldPos;
     }
 
-    public void AddObject(TileObject newObject)
+    public void _AddObject(TileObject newObject)
     {
         heldObjects.Add(newObject);
-        heldObjects.Sort((x, y) => x.order.CompareTo(y.order));
+        newObject.SetNewParentTile(this);
     }
 
     public void AddObjects(List<TileObject> tileObjects)
     {
         foreach (TileObject tileObject in tileObjects)
         {
-            heldObjects.Add(tileObject);
+            print(tileObject);
+            _AddObject(tileObject);
         }
 
-        heldObjects.Sort((x, y) => x.order.CompareTo(y.order));
+        EvaluateState();
     }
 
     public List<TileObject> PopObjects(HeldObjectsFiltering filter)
@@ -46,25 +48,40 @@ public class Tile : MonoBehaviour
         {
             case HeldObjectsFiltering.Pushable:
                 heldObjects = heldObjects.Where(obj => !obj.pushable).ToList();
-                return returnedObjects.Where(obj => obj.pushable).ToList();
+                returnedObjects = returnedObjects.Where(obj => obj.pushable).ToList();
+                break;
             case HeldObjectsFiltering.None:
                 heldObjects = new();
-                return returnedObjects;
+                break;
             default:
-                return new List<TileObject> { };
+                returnedObjects = new List<TileObject> { };
+                break;
         }
+
+        EvaluateState();
+        return returnedObjects;
     }
-    
+
     public void Evaluate(string command)
     {
+        EvaluateCommand(command);
+        EvaluateState();
+    }
+
+    public void EvaluateCommand(string command)
+    {
         if (heldObjects.Count == 0) return;
+        heldObjects.Sort((x, y) => x.order.CompareTo(y.order));
 
         int result = 0;
         foreach (TileObject obj in heldObjects)
         {
             result = obj.OnCommand(command, result);
         }
+    }
 
+    public void EvaluateState()
+    {
         solid = heldObjects.Any(obj => obj.solid);
         stopper = heldObjects.Any(obj => obj.solid && !obj.pushable);
     }

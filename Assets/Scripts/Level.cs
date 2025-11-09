@@ -66,7 +66,7 @@ public class Level : MonoBehaviour
             }
 
             tileObject.gridPos = new Vector2Int(gridObject.x, gridObject.y);
-            grid[gridObject.x, gridObject.y].AddObject(tileObject);
+            grid[gridObject.x, gridObject.y]._AddObject(tileObject);
             tileObject.Initialize();
         }
 
@@ -90,7 +90,7 @@ public class Level : MonoBehaviour
 
     public bool InGridBounds(Vector2Int selectedPos)
     {
-        return selectedPos.x >= 0 && selectedPos.y >= 0 && selectedPos.x <= grid.GetLength(0) && selectedPos.y <= grid.GetLength(1);
+        return selectedPos.x >= 0 && selectedPos.y >= 0 && selectedPos.x < grid.GetLength(0) && selectedPos.y < grid.GetLength(1);
     }
 
     public void MoveObject(TileObject tileObj, Vector2Int direction)
@@ -99,10 +99,11 @@ public class Level : MonoBehaviour
         
         bool canMove = false;
         bool hasEmptySpace = false;
-        List<Tile> selectedTiles = new();
+        List<Tile> selectedTiles = new() { grid[curGridPos.x, curGridPos.y] };
         Vector2Int selectedPos = curGridPos;
-        while (selectedPos != null)
+        while (true)
         {
+            selectedPos += direction;
             if (!InGridBounds(selectedPos)) break;
 
             Tile selectedTile = grid[selectedPos.x, selectedPos.y];
@@ -114,10 +115,9 @@ public class Level : MonoBehaviour
             }
 
             selectedTiles.Add(selectedTile);
-            selectedPos += direction;
         }
 
-        if (!hasEmptySpace) return;
+        if (hasEmptySpace) canMove = true;
         if (!canMove) return;
 
         foreach (Tile curTile in selectedTiles)
