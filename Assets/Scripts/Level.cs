@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Level : MonoBehaviour
@@ -75,10 +74,12 @@ public class Level : MonoBehaviour
         float screenHeight = cam.orthographicSize * 2f;
         float screenWidth = screenHeight * cam.aspect;
 
+        float padding = 0.9f;
+
         float gridWidth = width + tileSpacing * (width - 1);
         float gridHeight = height + tileSpacing * (height - 1);
 
-        float scale = Mathf.Min(screenWidth / gridWidth, screenHeight / gridHeight);
+        float scale = Mathf.Min(screenWidth / gridWidth, screenHeight / gridHeight) * padding;
         gridParent.localScale = new Vector3(scale, scale, 1f);
     }
 

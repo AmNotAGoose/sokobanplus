@@ -20,7 +20,7 @@ public class GridParser
     }
 
     /// <summary>
-    /// Parses a string in the format:
+    /// Parses a string in the format: What is this diddy blud doing on the calculato 
     /// x|y=|haswall|haswall|...|=|object_type-x,y|object_type-x,y|...
     /// </summary>
     public static ParsedGrid ParseGridString(string data)

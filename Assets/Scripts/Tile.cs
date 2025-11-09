@@ -7,6 +7,9 @@ public class Tile : MonoBehaviour
     public Vector2 worldPos;
     public bool isWall;
     public List<TileObject> heldObjects = new();
+
+    public bool solid;
+    public bool stopper;
     
     public void Initialize()
     {
