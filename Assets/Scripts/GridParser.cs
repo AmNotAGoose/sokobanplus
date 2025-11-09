@@ -8,7 +8,6 @@ public class GridParser
     {
         public int width;
         public int height;
-        public bool[,] walls;
         public List<GridObject> objects;
     }
 
@@ -20,8 +19,9 @@ public class GridParser
     }
 
     /// <summary>
-    /// Parses a string in the format: What is this diddy blud doing on the calculato 
-    /// x|y=|haswall|haswall|...|=|object_type-x,y|object_type-x,y|...
+    /// Parses a string in the format:
+    /// width|height=|type-x,y|type-x,y|...
+    /// Example: 4|8=|player-0,0|win-2,3|numberbox-1,2|wall-0,1
     /// </summary>
     public static ParsedGrid ParseGridString(string data)
     {
@@ -30,7 +30,7 @@ public class GridParser
 
         string[] mainParts = data.Split(new string[] { "=|" }, StringSplitOptions.None);
 
-        if (mainParts.Length < 3)
+        if (mainParts.Length < 2)
             throw new Exception("Invalid grid format.");
 
         // 1. Parse size
@@ -38,22 +38,8 @@ public class GridParser
         parsed.width = int.Parse(sizeParts[0]);
         parsed.height = int.Parse(sizeParts[1]);
 
-        // 2. Parse wall booleans
-        string[] wallParts = mainParts[1].Split('|', StringSplitOptions.RemoveEmptyEntries);
-        if (wallParts.Length != parsed.width * parsed.height)
-            throw new Exception("Wall count does not match grid size.");
-
-        parsed.walls = new bool[parsed.width, parsed.height];
-
-        for (int i = 0; i < wallParts.Length; i++)
-        {
-            int x = i % parsed.width;
-            int y = i / parsed.width;
-            parsed.walls[x, y] = bool.Parse(wallParts[i]);
-        }
-
-        // 3. Parse objects
-        string[] objectParts = mainParts[2].Split('|', StringSplitOptions.RemoveEmptyEntries);
+        // 2. Parse objects (walls are just objects now)
+        string[] objectParts = mainParts[1].Split('|', StringSplitOptions.RemoveEmptyEntries);
         foreach (string obj in objectParts)
         {
             string[] typeAndPos = obj.Split('-');
@@ -61,7 +47,6 @@ public class GridParser
 
             string type = typeAndPos[0];
             string[] xy = typeAndPos[1].Split(',');
-
             if (xy.Length != 2) continue;
 
             parsed.objects.Add(new GridObject

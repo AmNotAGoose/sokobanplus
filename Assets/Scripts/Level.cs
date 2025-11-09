@@ -37,7 +37,6 @@ public class Level : MonoBehaviour
                 Tile curTile = curTileGO.GetComponent<Tile>();
                 curTile.gridPos = new Vector2Int(i, j);
                 curTile.worldPos = localPos;
-                curTile.isWall = parsedGrid.walls[i, j];
 
                 grid[i, j] = curTile;
                 curTile.Initialize();
@@ -53,6 +52,9 @@ public class Level : MonoBehaviour
             {
                 case "player":
                     tileObject = objGO.AddComponent<Player>();
+                    break;
+                case "wall":
+                    tileObject = objGO.AddComponent<WallTileObject>();
                     break;
                 case "win":
                     tileObject = objGO.AddComponent<WinTileObject>();

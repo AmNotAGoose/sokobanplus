@@ -30,7 +30,7 @@ public abstract class TileObject : MonoBehaviour
     }
     public void LerpToLocalOrigin()
     {
-        StartCoroutine(MoveToTarget(new Vector2(0, 0), 0.3f));
+        StartCoroutine(MoveToTarget(new Vector2(0, 0), 0.1f));
     }
     IEnumerator MoveToTarget(Vector3 endPos, float duration)
     {
