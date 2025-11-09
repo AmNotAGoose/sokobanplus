@@ -7,13 +7,11 @@ public class WallTileObject : TileObject
         type = "wall";
         solid = true;
         pushable = false;
+
+        order = 0;
         renderOrder = 50;
     }
 
-    public override int OnCommand(string command, int prev)
-    {
-        return prev;
-    }
-    public override void OnPlayerEnter() { }
-    public override void OnPlayerExit() { }
+    public override int OnCommand(string command, int prev) { return prev; }
+    public override void OnCommandFinished(int newValue) { }
 }

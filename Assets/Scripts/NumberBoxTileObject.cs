@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class NumberBoxTileObject : TileObject
@@ -9,13 +10,14 @@ public class NumberBoxTileObject : TileObject
         type = "numberbox";
         solid = true;
         pushable = true;
+
+        order = 20;
         renderOrder = 20;
     }
 
-    public override int OnCommand(string command, int prev)
+    public override int OnCommand(string command, int prev) { return prev; }
+    public override void OnCommandFinished(int newValue)
     {
-        return prev;
+        value = newValue;
     }
-    public override void OnPlayerEnter() { }
-    public override void OnPlayerExit() { }
 }

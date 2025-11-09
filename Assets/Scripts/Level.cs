@@ -131,4 +131,12 @@ public class Level : MonoBehaviour
             grid[nextTile.x, nextTile.y].AddObjects(curTileObjects);
         }
     }
+
+    public void EvaluateCommand(string command)
+    {
+        foreach (Tile tile in grid)
+        {
+            tile.Evaluate(command);
+        }
+    }
 }

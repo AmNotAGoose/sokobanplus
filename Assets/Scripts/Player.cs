@@ -7,10 +7,6 @@ public class Player : TileObject
 
     public bool canMove;
 
-    public override int OnCommand(string command, int prev) { return prev; }
-    public override void OnPlayerEnter() { }
-    public override void OnPlayerExit() { }
-
     private void Awake()
     {
         type = "player";
@@ -18,6 +14,7 @@ public class Player : TileObject
         solid = true;
         pushable = true;
 
+        order = 10;
         renderOrder = 20;
     }
 
@@ -48,4 +45,7 @@ public class Player : TileObject
         yield return new WaitForSeconds(0.5f);
         canMove = true;
     }
+
+    public override int OnCommand(string command, int prev) { return prev; }
+    public override void OnCommandFinished(int newValue) { }
 }

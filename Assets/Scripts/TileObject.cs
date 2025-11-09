@@ -47,7 +47,6 @@ public abstract class TileObject : MonoBehaviour
 
         transform.localPosition = endPos;
     }
-    public abstract void OnPlayerEnter();
-    public abstract void OnPlayerExit();
     public abstract int OnCommand(string command, int prev);
+    public abstract void OnCommandFinished(int newValue);
 }

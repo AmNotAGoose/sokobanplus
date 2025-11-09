@@ -12,7 +12,6 @@ public class Tile : MonoBehaviour
 {
     public Vector2Int gridPos;
     public Vector2 worldPos;
-    public bool isWall;
     public List<TileObject> heldObjects = new();
 
     public bool solid;
@@ -69,12 +68,17 @@ public class Tile : MonoBehaviour
     public void EvaluateCommand(string command)
     {
         if (heldObjects.Count == 0) return;
-        heldObjects.Sort((x, y) => x.order.CompareTo(y.order));
+        heldObjects.Sort((x, y) => x.order.CompareTo(y.order)); // asc!!!
 
         int result = 0;
         foreach (TileObject obj in heldObjects)
         {
             result = obj.OnCommand(command, result);
+        }
+
+        foreach (TileObject obj in heldObjects)
+        {
+            obj.OnCommandFinished(result);
         }
     }
 

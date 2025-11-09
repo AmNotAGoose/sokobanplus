@@ -10,21 +10,15 @@ public class WinTileObject : TileObject
         type = "win";
         solid = false;
         pushable = false;
+
+        order = 30;
         renderOrder = 30;
     }
 
-    public override int OnCommand(string command, int prev)
+    public override int OnCommand(string command, int prev) { return prev; }
+
+    public override void OnCommandFinished(int newValue)
     {
-        if (prev == targetValue)
-        {
-            isWon = true;
-        } else
-        {
-            isWon = false;
-        }
-        
-        return prev;
+        isWon = newValue == targetValue;
     }
-    public override void OnPlayerEnter() { }
-    public override void OnPlayerExit() { }
 }
