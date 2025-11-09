@@ -387,7 +387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c9d3dbea79f74047b4be259e8d69c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelString: '4|8=|true|false|false|true|false|true|false|false|true|false|false|true|false|true|false|false|true|false|true|false|false|true|false|true|false|false|true|false|true|false|false|true=|player-0,0|win-2,3 '
+  levelString: 4|8=|true|false|false|true|false|true|false|false|true|false|false|true|false|true|false|false|true|false|true|false|false|true|false|true|false|false|true|false|true|false|false|true=|player-0,0|win-2,3|numberbox-1,2
   width: 0
   height: 0
   winConditions: []

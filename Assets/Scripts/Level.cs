@@ -53,12 +53,13 @@ public class Level : MonoBehaviour
             {
                 case "player":
                     tileObject = objGO.AddComponent<Player>();
-                    tileObject.type = "player";
                     break;
                 case "win":
                     tileObject = objGO.AddComponent<WinTileObject>();
-                    tileObject.type = "win";
                     winConditions.Add((WinTileObject)tileObject);
+                    break;
+                case "numberbox":
+                    tileObject = objGO.AddComponent<NumberBoxTileObject>();
                     break;
                 default:
                     print("something BROKEN");
@@ -66,7 +67,7 @@ public class Level : MonoBehaviour
             }
 
             tileObject.gridPos = new Vector2Int(gridObject.x, gridObject.y);
-            grid[gridObject.x, gridObject.y]._AddObject(tileObject);
+            grid[gridObject.x, gridObject.y].AddObject(tileObject);
             tileObject.Initialize();
         }
 
@@ -120,6 +121,7 @@ public class Level : MonoBehaviour
         if (hasEmptySpace) canMove = true;
         if (!canMove) return;
 
+        selectedTiles.Reverse();
         foreach (Tile curTile in selectedTiles)
         {
             List<TileObject> curTileObjects = curTile.PopObjects(HeldObjectsFiltering.Pushable);

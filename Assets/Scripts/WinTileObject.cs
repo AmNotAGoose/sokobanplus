@@ -7,6 +7,7 @@ public class WinTileObject : TileObject
 
     private void Awake()
     {
+        type = "win";
         solid = false;
         pushable = false;
         renderOrder = 30;

@@ -13,6 +13,7 @@ public class Player : TileObject
 
     private void Awake()
     {
+        type = "player";
         level = FindObjectsByType<Level>(FindObjectsSortMode.None)[0];
         solid = true;
         pushable = true;

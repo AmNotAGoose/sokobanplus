@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public enum HeldObjectsFiltering
@@ -24,10 +23,11 @@ public class Tile : MonoBehaviour
         transform.localPosition = worldPos;
     }
 
-    public void _AddObject(TileObject newObject)
+    public void AddObject(TileObject newObject)
     {
         heldObjects.Add(newObject);
         newObject.SetNewParentTile(this);
+        EvaluateState();
     }
 
     public void AddObjects(List<TileObject> tileObjects)
@@ -35,10 +35,8 @@ public class Tile : MonoBehaviour
         foreach (TileObject tileObject in tileObjects)
         {
             print(tileObject);
-            _AddObject(tileObject);
+            AddObject(tileObject);
         }
-
-        EvaluateState();
     }
 
     public List<TileObject> PopObjects(HeldObjectsFiltering filter)
