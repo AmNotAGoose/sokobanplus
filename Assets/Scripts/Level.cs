@@ -2,6 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[System.Serializable]
+public class TileObjectPrefab
+{
+    public string id;
+    public TileObject tileObject;
+}
+
 public class Level : MonoBehaviour
 {
     public string levelString;
@@ -15,6 +22,7 @@ public class Level : MonoBehaviour
     public float tileSpacing = 0f;
     public GameObject tilePrefab;
     public GameObject tileObjectPrefab;
+    public List<TileObjectPrefab> tileObjectPrefabs;
 
     void Start()
     {
@@ -45,28 +53,10 @@ public class Level : MonoBehaviour
 
         foreach (GridParser.GridObject gridObject in parsedGrid.objects)
         {
-            GameObject objGO = Instantiate(tileObjectPrefab.gameObject, grid[gridObject.x, gridObject.y].transform);
-            TileObject tileObject;
+            GameObject tileObjectPrefab = tileObjectPrefabs.First(obj => obj.id == gridObject.type).tileObject.gameObject;
+            GameObject objGO = Instantiate(tileObjectPrefab, grid[gridObject.x, gridObject.y].transform);
 
-            switch (gridObject.type)
-            {
-                case "player":
-                    tileObject = objGO.AddComponent<Player>();
-                    break;
-                case "wall":
-                    tileObject = objGO.AddComponent<WallTileObject>();
-                    break;
-                case "win":
-                    tileObject = objGO.AddComponent<WinTileObject>();
-                    winConditions.Add((WinTileObject)tileObject);
-                    break;
-                case "numberbox":
-                    tileObject = objGO.AddComponent<NumberBoxTileObject>();
-                    break;
-                default:
-                    print("something BROKEN");
-                    continue;
-            }
+            TileObject tileObject = objGO.GetComponent<TileObject>();
 
             tileObject.gridPos = new Vector2Int(gridObject.x, gridObject.y);
             grid[gridObject.x, gridObject.y].AddObject(tileObject);

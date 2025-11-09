@@ -1,16 +1,22 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : TileObject
 {
     public Level level;
 
+    public bool typing;
+    public PlayerCommands playerCommands;
+
     public bool canMove;
 
     private void Awake()
     {
-        type = "player";
+        playerCommands = transform.AddComponent<PlayerCommands>();
         level = FindObjectsByType<Level>(FindObjectsSortMode.None)[0];
+
+        type = "player";
         solid = true;
         pushable = true;
 
@@ -20,22 +26,34 @@ public class Player : TileObject
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        typing = Input.GetKey(KeyCode.LeftShift);
+        if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            level.MoveObject(this, new Vector2Int(0, 1));
-        } 
-        else if (Input.GetKeyDown(KeyCode.A))
-        {
-            level.MoveObject(this, new Vector2Int(-1, 0));
+            playerCommands.ClearText();
         }
-        else if (Input.GetKeyDown(KeyCode.S))
+
+        if (typing)
         {
-            level.MoveObject(this, new Vector2Int(0, -1));
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
+            playerCommands.AddText(Input.inputString);
+        } else
         {
-            level.MoveObject(this, new Vector2Int(1, 0));
-        }
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                level.MoveObject(this, new Vector2Int(0, 1));
+            }
+            else if (Input.GetKeyDown(KeyCode.A))
+            {
+                level.MoveObject(this, new Vector2Int(-1, 0));
+            }
+            else if (Input.GetKeyDown(KeyCode.S))
+            {
+                level.MoveObject(this, new Vector2Int(0, -1));
+            }
+            else if (Input.GetKeyDown(KeyCode.D))
+            {
+                level.MoveObject(this, new Vector2Int(1, 0));
+            }
+        }        
     }
 
     public IEnumerator ResetCanMove()
