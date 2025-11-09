@@ -11,7 +11,7 @@ public class Player : TileObject
 
     public bool canMove;
 
-    private void Awake()
+    public override void AfterInitialize()
     {
         level = FindObjectsByType<Level>(FindObjectsSortMode.None)[0];
 

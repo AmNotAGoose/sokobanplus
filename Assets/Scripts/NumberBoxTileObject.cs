@@ -5,7 +5,7 @@ public class NumberBoxTileObject : TileObject
 {
     public float value; // options 0
 
-    private void Awake()
+    public override void AfterInitialize()
     {
         type = "numberbox";
         solid = true;

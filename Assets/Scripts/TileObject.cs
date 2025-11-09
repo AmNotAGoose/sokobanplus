@@ -8,12 +8,14 @@ public abstract class TileObject : MonoBehaviour
 {
     SpriteRenderer spriteRenderer;
 
+    public Tile parentTile;
+
     public List<string> options;
 
     public Vector2Int gridPos;
     public string type;
     public int order;
-    public int renderOrder; 
+    public int renderOrder;
 
     public bool solid;
     public bool pushable;
@@ -26,12 +28,17 @@ public abstract class TileObject : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         transform.localPosition = Vector2.zero;
         spriteRenderer.sortingOrder = renderOrder;
+        AfterInitialize();
+        parentTile.EvaluateState();
     }
+    public abstract void AfterInitialize();
     public void SetNewParentTile(Tile tile)
     {
+        parentTile = tile;
         gridPos = tile.gridPos;
         transform.SetParent(tile.transform);
         LerpToLocalOrigin();
+        parentTile.EvaluateState();
     }
     public void LerpToLocalOrigin()
     {

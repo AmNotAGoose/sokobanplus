@@ -7,7 +7,7 @@ public class WinTileObject : TileObject
     public float targetValue; // options 0
     public bool isWon;
 
-    private void Awake()
+    public override void AfterInitialize()
     {
         level = FindObjectsByType<Level>(FindObjectsSortMode.None)[0];
         level.winConditions.Add(this);

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WallTileObject : TileObject
 {
-    private void Awake()
+    public override void AfterInitialize()
     {
         type = "wall";
         solid = true;

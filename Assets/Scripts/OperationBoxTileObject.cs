@@ -6,10 +6,10 @@ public class OperationBoxTileObject : TileObject
     string operation; // options 0
     float value; // options 1
 
-    private void Awake()
+    public override void AfterInitialize()
     {
         type = "operationbox";
-        solid = true;
+        solid = false;
         pushable = false;
 
         operation = options[0];
