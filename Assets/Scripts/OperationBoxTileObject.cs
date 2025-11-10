@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class OperationBoxTileObject : TileObject
 {
-    string operation; // options 0
-    float value; // options 1
+    public string operation; // options 0
+    public float value; // options 1
 
     public override void AfterInitialize()
     {
@@ -15,18 +15,18 @@ public class OperationBoxTileObject : TileObject
         operation = options[0];
         value = float.Parse(options[1]);
 
-        order = 0;
+        order = 50;
         renderOrder = 50;
     }
 
     public override float OnCommand(string command, float prev)
     {
-        return operation switch
+        return command switch
         {
-            "+" => prev + value,
-            "-" => prev - value,
-            "*" => prev * value,
-            "/" => prev / value,
+            "ADD" => prev + value,
+            "SUB" => prev - value,
+            "MUL" => prev * value,
+            "DIV" => prev / value,
             _ => prev,
         };
     }

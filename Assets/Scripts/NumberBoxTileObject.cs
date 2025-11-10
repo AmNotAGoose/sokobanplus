@@ -17,7 +17,7 @@ public class NumberBoxTileObject : TileObject
         renderOrder = 20;
     }
 
-    public override float OnCommand(string command, float prev) { return prev; }
+    public override float OnCommand(string command, float prev) { return value; }
     public override void OnCommandFinished(float newValue)
     {
         value = newValue;
