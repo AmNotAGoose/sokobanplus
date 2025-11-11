@@ -1,6 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class TileObjectPrefab
@@ -25,8 +27,10 @@ public class Level : MonoBehaviour
 
     [Header("LEVEL SPECIFIC SETTINGS")]
     public Color backgroundColor;
-    public ParticleSystem[] winParticles;
-    public AudioClip winSound;
+    public Color tileColor;
+    public ParticleSystem[] winParticlesStart;
+    public ParticleSystem[] winParticlesStop;
+    public AudioSource winSound;
 
 
     void Start()
@@ -51,6 +55,8 @@ public class Level : MonoBehaviour
                 curTile.gridPos = new Vector2Int(i, j);
                 curTile.worldPos = localPos;
 
+                curTile.transform.GetComponent<SpriteRenderer>().color = tileColor;
+
                 grid[i, j] = curTile;
                 curTile.Initialize();
             }
@@ -69,7 +75,6 @@ public class Level : MonoBehaviour
         }
 
         Camera cam = Camera.main;
-        cam.backgroundColor = backgroundColor;
         float screenHeight = cam.orthographicSize * 2f;
         float screenWidth = screenHeight * cam.aspect;
 
@@ -80,13 +85,28 @@ public class Level : MonoBehaviour
 
         float scale = Mathf.Min(screenWidth / gridWidth, screenHeight / gridHeight) * padding;
         gridParent.localScale = new Vector3(scale, scale, 1f);
+
+        cam.backgroundColor = backgroundColor;
     }
 
-    public void CheckIfWon()
+    public IEnumerator CheckIfWon()
     {
-        if (!winConditions.All(w => w.isWon)) return;
+        if (!winConditions.All(w => w.isWon)) yield return null;
 
+        foreach (ParticleSystem particle in winParticlesStart)
+        {
+            particle.Play();
+        }
 
+        foreach (ParticleSystem particle in winParticlesStop)
+        {
+            particle.Pause();
+        }
+
+        winSound.Play();
+
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene(0);
     }
 
     public bool InGridBounds(Vector2Int selectedPos)
