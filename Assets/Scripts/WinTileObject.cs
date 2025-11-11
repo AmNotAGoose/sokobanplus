@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class WinTileObject : TileObject
 {
-
     public TileObjectTextUpdater textManager;
     Level level;
+
+    public Animator animator;
 
     public float targetValue; // options 0
     public bool isWon;
@@ -30,5 +31,9 @@ public class WinTileObject : TileObject
     public override void OnCommandFinished(float newValue)
     {
         isWon = newValue == targetValue;
+        if (isWon)
+        {
+            animator.Play("WinningAnimation");
+        }
     }
 }

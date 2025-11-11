@@ -14,6 +14,7 @@ public class NumberBoxTileObject : TileObject
         pushable = true;
 
         value = float.Parse(options[0]);
+        textManager.UpdateText(1, value.ToString());
 
         order = 20;
         renderOrder = 20;
