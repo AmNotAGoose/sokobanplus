@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class WinTileObject : TileObject
 {
+
+    public TileObjectTextUpdater textManager;
     Level level;
 
     public float targetValue; // options 0
@@ -13,6 +15,7 @@ public class WinTileObject : TileObject
         level.winConditions.Add(this);
 
         targetValue = float.Parse(options[0]);
+        textManager.UpdateText(0, targetValue.ToString());
 
         type = "win";
         solid = false;

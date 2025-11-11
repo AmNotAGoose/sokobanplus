@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class OperationBoxTileObject : TileObject
 {
+    public TileObjectTextUpdater textManager;
+
     public string operation; // options 0
     public float value; // options 1
 
@@ -12,8 +14,9 @@ public class OperationBoxTileObject : TileObject
         solid = false;
         pushable = false;
 
-        operation = options[0];
-        value = float.Parse(options[1]);
+        //operation = options[0];
+        value = float.Parse(options[0]);
+        textManager.UpdateText(0, value.ToString());
 
         order = 50;
         renderOrder = 50;

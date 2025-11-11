@@ -53,8 +53,6 @@ public class Level : MonoBehaviour
         foreach (GridParser.GridObject gridObject in parsedGrid.objects)
         {
             GameObject tileObjectPrefab = tileObjectPrefabs.First(obj => obj.id == gridObject.type).tileObject.gameObject;
-            print(tileObjectPrefab);
-            print(grid[gridObject.x, gridObject.y].transform);
             GameObject objGO = Instantiate(tileObjectPrefab, grid[gridObject.x, gridObject.y].transform);
 
             TileObject tileObject = objGO.GetComponent<TileObject>();

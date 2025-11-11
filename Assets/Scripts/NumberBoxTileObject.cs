@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class NumberBoxTileObject : TileObject
 {
+    public TileObjectTextUpdater textManager;
+
     public float value; // options 0
 
     public override void AfterInitialize()
@@ -21,5 +23,6 @@ public class NumberBoxTileObject : TileObject
     public override void OnCommandFinished(float newValue)
     {
         value = newValue;
+        textManager.UpdateText(1, value.ToString());
     }
 }

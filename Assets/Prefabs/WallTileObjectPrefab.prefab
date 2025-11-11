@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 537272345279182672, guid: 73597093433249e42be8d7b8e5ffacb1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8660602319308725020, guid: 73597093433249e42be8d7b8e5ffacb1, type: 3}
       propertyPath: m_Name
       value: WallTileObjectPrefab
@@ -77,6 +81,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c10013fe8f58d4c9bc98c07503efe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parentTile: {fileID: 0}
+  options: []
   gridPos: {x: 0, y: 0}
   type: 
   order: 0
