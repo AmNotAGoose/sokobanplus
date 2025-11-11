@@ -64,6 +64,7 @@ public class Tile : MonoBehaviour
         EvaluateState();
     }
 
+    // this is SO BAD IT LITERALLY LOOPS OVER 10 TIMES PER TILE 
     public void EvaluateCommand(string command)
     {
         if (heldObjects.Count == 0) return;
@@ -73,18 +74,30 @@ public class Tile : MonoBehaviour
         foreach (TileObject obj in heldObjects)
         {
             result = obj.OnCommand(command, result);
-            print(obj.type + " " + result.ToString());
         }
 
         foreach (TileObject obj in heldObjects)
         {
             obj.OnCommandFinished(result);
         }
+
+        EvaluateState();
     }
 
     public void EvaluateState()
     {
         solid = heldObjects.Any(obj => obj.solid);
         stopper = heldObjects.Any(obj => obj.solid && !obj.pushable);
+
+        float result = 0;
+        foreach (TileObject obj in heldObjects)
+        {
+            result = obj.OnCommand("PASS", result);
+        }
+
+        foreach (TileObject obj in heldObjects)
+        {
+            obj.OnCommandFinished(result);
+        }
     }
 }

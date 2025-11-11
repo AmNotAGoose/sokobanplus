@@ -24,16 +24,15 @@ public class WinTileObject : TileObject
 
         order = 30;
         renderOrder = 30;
-    }
 
-    public override float OnCommand(string command, float prev) { return prev; }
+        animator.Play("WinningAnimation");
+        animator.speed = isWon ? 1 : 0;
+    }
 
     public override void OnCommandFinished(float newValue)
     {
         isWon = newValue == targetValue;
-        if (isWon)
-        {
-            animator.Play("WinningAnimation");
-        }
+        print(newValue);
+        animator.speed = isWon ? 1 : 0;
     }
 }

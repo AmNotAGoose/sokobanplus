@@ -23,6 +23,12 @@ public class Level : MonoBehaviour
     public GameObject tilePrefab;
     public List<TileObjectPrefab> tileObjectPrefabs;
 
+    [Header("LEVEL SPECIFIC SETTINGS")]
+    public Color backgroundColor;
+    public ParticleSystem[] winParticles;
+    public AudioClip winSound;
+
+
     void Start()
     {
         GridParser.ParsedGrid parsedGrid = GridParser.ParseGridString(levelString);
@@ -63,6 +69,7 @@ public class Level : MonoBehaviour
         }
 
         Camera cam = Camera.main;
+        cam.backgroundColor = backgroundColor;
         float screenHeight = cam.orthographicSize * 2f;
         float screenWidth = screenHeight * cam.aspect;
 
@@ -75,9 +82,11 @@ public class Level : MonoBehaviour
         gridParent.localScale = new Vector3(scale, scale, 1f);
     }
 
-    public bool CheckIfWon()
+    public void CheckIfWon()
     {
-        return winConditions.All(w => w.isWon);
+        if (!winConditions.All(w => w.isWon)) return;
+
+
     }
 
     public bool InGridBounds(Vector2Int selectedPos)
@@ -119,6 +128,8 @@ public class Level : MonoBehaviour
             Vector2Int nextTile = curTile.gridPos + direction;
             grid[nextTile.x, nextTile.y].AddObjects(curTileObjects);
         }
+
+        CheckIfWon();
     }
 
     public void EvaluateCommand(string command)

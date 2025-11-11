@@ -33,6 +33,4 @@ public class OperationBoxTileObject : TileObject
             _ => prev,
         };
     }
-
-    public override void OnCommandFinished(float newValue) { }
 }

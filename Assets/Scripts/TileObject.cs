@@ -59,6 +59,6 @@ public abstract class TileObject : MonoBehaviour
 
         transform.localPosition = endPos;
     }
-    public abstract float OnCommand(string command, float prev);
-    public abstract void OnCommandFinished(float newValue);
+    public virtual float OnCommand(string command, float prev) { return prev; }
+    public virtual void OnCommandFinished(float newValue) { }
 }
