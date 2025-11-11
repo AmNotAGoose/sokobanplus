@@ -19,3 +19,5 @@ controls:
 - R: restart level
 - WASD: move player
 - SHIFT + 'ADD' or 'SUB' or 'MUL' or 'DIV': for all number blocks on operation blocks, the number block's new value = (number block's value) (OPERATION) (operation block value)
+
+ai discolsoeure: i used ai for the level string parser nothing else
