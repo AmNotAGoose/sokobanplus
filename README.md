@@ -1,7 +1,9 @@
 # sokobanplus
 video demo:
+https://youtu.be/OALZvREjDRI
 
 live demo:
+https://amnotagoose.itch.io/sokoban-hmm
 
 # what is it
 it is a sokoban type math game where you have to use the 4 basic operations (add, sub, mul, div) to solve puzzles
