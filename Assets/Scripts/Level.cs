@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 [System.Serializable]
@@ -32,6 +34,12 @@ public class Level : MonoBehaviour
     public ParticleSystem[] winParticlesStop;
     public AudioSource winSound;
 
+    public Volume volume;
+    private LensDistortion lensDistortion;
+
+    public bool ending = false;
+
+    public int nextLevel;
 
     void Start()
     {
@@ -87,11 +95,34 @@ public class Level : MonoBehaviour
         gridParent.localScale = new Vector3(scale, scale, 1f);
 
         cam.backgroundColor = backgroundColor;
+        StartCoroutine(StartGameEffect());
+    }
+
+    public IEnumerator StartGameEffect()
+    {
+        if (volume.profile.TryGet<LensDistortion>(out lensDistortion)) lensDistortion.active = true;
+
+        float startValue = lensDistortion.intensity.value;
+        float elapsed = 0f;
+        float duration = 2f;
+        float targetValue = 0.188f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+            lensDistortion.intensity.value = Mathf.Lerp(startValue, targetValue, t);
+            yield return null;
+        }
+
+        lensDistortion.intensity.value = targetValue;
     }
 
     public IEnumerator CheckIfWon()
     {
-        if (!winConditions.All(w => w.isWon)) yield return null;
+        if (!winConditions.All(w => w.isWon)) yield break;
+
+        ending = true;
 
         foreach (ParticleSystem particle in winParticlesStart)
         {
@@ -106,7 +137,7 @@ public class Level : MonoBehaviour
         winSound.Play();
 
         yield return new WaitForSeconds(1.5f);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(nextLevel);
     }
 
     public bool InGridBounds(Vector2Int selectedPos)
@@ -116,6 +147,8 @@ public class Level : MonoBehaviour
 
     public void MoveObject(TileObject tileObj, Vector2Int direction)
     {
+        if (ending) return;
+
         Vector2Int curGridPos = tileObj.gridPos;
         
         bool canMove = false;
@@ -149,7 +182,7 @@ public class Level : MonoBehaviour
             grid[nextTile.x, nextTile.y].AddObjects(curTileObjects);
         }
 
-        CheckIfWon();
+        StartCoroutine(CheckIfWon());
     }
 
     public void EvaluateCommand(string command)

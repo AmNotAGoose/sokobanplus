@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : TileObject
 {
@@ -51,6 +52,9 @@ public class Player : TileObject
             else if (Input.GetKeyDown(KeyCode.D))
             {
                 level.MoveObject(this, new Vector2Int(1, 0));
+            } else if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }        
     }

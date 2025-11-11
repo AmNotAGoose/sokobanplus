@@ -24,7 +24,7 @@ public class OperationBoxTileObject : TileObject
 
     public override float OnCommand(string command, float prev)
     {
-        return command switch
+        return command.ToUpper() switch
         {
             "ADD" => prev + value,
             "SUB" => prev - value,
