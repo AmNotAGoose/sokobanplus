@@ -31,7 +31,7 @@ public class Level : MonoBehaviour
     public Color backgroundColor;
     public Color tileColor;
     public ParticleSystem[] winParticlesStart;
-    public ParticleSystem[] winParticlesStop;
+    public ParticleSystem[] winParticlesStop; 
     private AudioManager audioManager;
 
     public Volume volume;
@@ -72,18 +72,6 @@ public class Level : MonoBehaviour
             }
         }
 
-        foreach (GridParser.GridObject gridObject in parsedGrid.objects)
-        {
-            GameObject tileObjectPrefab = tileObjectPrefabs.First(obj => obj.id == gridObject.type).tileObject.gameObject;
-            GameObject objGO = Instantiate(tileObjectPrefab, grid[gridObject.x, gridObject.y].transform);
-
-            TileObject tileObject = objGO.GetComponent<TileObject>();
-
-            tileObject.gridPos = new Vector2Int(gridObject.x, gridObject.y);
-            grid[gridObject.x, gridObject.y].AddObject(tileObject);
-            tileObject.Initialize(gridObject.options);
-        }
-
         Camera cam = Camera.main;
         float screenHeight = cam.orthographicSize * 2f;
         float screenWidth = screenHeight * cam.aspect;
@@ -95,6 +83,18 @@ public class Level : MonoBehaviour
 
         float scale = Mathf.Min(screenWidth / gridWidth, screenHeight / gridHeight) * padding;
         gridParent.localScale = new Vector3(scale, scale, 1f);
+
+        foreach (GridParser.GridObject gridObject in parsedGrid.objects)
+        {
+            GameObject tileObjectPrefab = tileObjectPrefabs.First(obj => obj.id == gridObject.type).tileObject.gameObject;
+            GameObject objGO = Instantiate(tileObjectPrefab, grid[gridObject.x, gridObject.y].transform);
+
+            TileObject tileObject = objGO.GetComponent<TileObject>();
+
+            tileObject.gridPos = new Vector2Int(gridObject.x, gridObject.y);
+            grid[gridObject.x, gridObject.y].AddObject(tileObject);
+            tileObject.Initialize(gridObject.options);
+        }
 
         cam.backgroundColor = backgroundColor;
         StartCoroutine(StartGameEffect());

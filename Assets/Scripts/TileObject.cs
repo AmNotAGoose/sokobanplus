@@ -53,7 +53,7 @@ public abstract class TileObject : MonoBehaviour
         while (moveQueue.Count > 0)
         {
             Vector3 target = moveQueue.Dequeue();
-            yield return StartCoroutine(MoveToTarget(target, 0.6f));
+            yield return StartCoroutine(MoveToTarget(target, 0.1f));
         }
 
         isMoving = false;
