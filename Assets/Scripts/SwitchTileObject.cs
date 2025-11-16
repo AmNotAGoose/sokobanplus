@@ -1,6 +1,11 @@
 using UnityEngine;
 
-public class SwitchTileObject : TileObject
+public interface ISwitchTileObject
+{
+    bool isSatisfied { get; }
+}
+
+public class SwitchTileObject : TileObject, ISwitchTileObject
 {
     public TileObjectTextUpdater textManager;
     Level level;
@@ -9,7 +14,7 @@ public class SwitchTileObject : TileObject
 
     public float targetValue; // options 0
     public int id; // options 1
-    public bool isSatisfied;
+    public bool isSatisfied { get; private set; }
 
     public override void AfterInitialize()
     {

@@ -121,6 +121,41 @@ public class Level : MonoBehaviour
         lensDistortion.intensity.value = targetValue;
     }
 
+    public bool CheckIfNearbyValid(TileObject tileObject)
+    {
+        List<Vector2Int> nearbyTiles = new();
+        nearbyTiles.Add(tileObject.gridPos + new Vector2Int(-1, 1));
+        nearbyTiles.Add(tileObject.gridPos + new Vector2Int(-1, 0));
+        nearbyTiles.Add(tileObject.gridPos + new Vector2Int(-1, -1));
+
+        nearbyTiles.Add(tileObject.gridPos + new Vector2Int(0, 1));
+        nearbyTiles.Add(tileObject.gridPos + new Vector2Int(0, 0));
+        nearbyTiles.Add(tileObject.gridPos + new Vector2Int(0, -1));
+
+        nearbyTiles.Add(tileObject.gridPos + new Vector2Int(1, 1));
+        nearbyTiles.Add(tileObject.gridPos + new Vector2Int(1, 0));
+        nearbyTiles.Add(tileObject.gridPos + new Vector2Int(1, -1));
+
+        bool isValid = true;
+        bool oneFound = false;
+        foreach (Vector2Int tilePos in nearbyTiles)
+        {
+            if (!InGridBounds(tilePos)) continue;
+            foreach (TileObject curTileObject in grid[tilePos.x, tilePos.y].heldObjects)
+            {
+                if (curTileObject is ISwitchTileObject switchObject)
+                {
+                    oneFound = true;
+                    isValid = isValid && switchObject.isSatisfied;
+                }
+            }
+        }
+
+        isValid = isValid && oneFound;
+
+        return isValid;
+    }
+
     public IEnumerator CheckIfWon()
     {
         if (!winConditions.All(w => w.isWon)) yield break;

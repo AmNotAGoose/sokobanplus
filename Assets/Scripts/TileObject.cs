@@ -75,4 +75,5 @@ public abstract class TileObject : MonoBehaviour
     }
     public virtual float OnCommand(string command, float prev) { return prev; }
     public virtual void OnCommandFinished(float newValue) { }
+    public virtual void OnEvaluateFinish() { }
 }
