@@ -21,6 +21,7 @@ public class Level : MonoBehaviour
     public int height;
     public Tile[,] grid;
     public List<WinTileObject> winConditions;
+    public Dictionary<int, SwitchTileObject> switchTiles = new();
 
     public Transform gridParent;
     public float tileSpacing = 0f;

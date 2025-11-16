@@ -28,8 +28,6 @@ public abstract class TileObject : MonoBehaviour
         options = _options;
         spriteRenderer = GetComponent<SpriteRenderer>();
         transform.localPosition = Vector2.zero;
-        print(parentTile.transform.position);
-        print(transform.position);
         spriteRenderer.sortingOrder = renderOrder;
         AfterInitialize();
         parentTile.EvaluateState();
