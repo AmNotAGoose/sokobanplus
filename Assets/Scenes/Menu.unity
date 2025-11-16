@@ -10475,6 +10475,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1113778289}
   - {fileID: 329164626}
   - {fileID: 365283625}
   - {fileID: 1470493654}
@@ -10608,7 +10609,6 @@ RectTransform:
   m_Children:
   - {fileID: 1065827153}
   - {fileID: 862256909}
-  - {fileID: 1113778289}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -10896,7 +10896,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1249800031}
+    m_TransformParent: {fileID: 1065827153}
     m_Modifications:
     - target: {fileID: 906570018464308349, guid: 84eaf08d01c2da44580cb508c8fabeac, type: 3}
       propertyPath: m_Name
@@ -10952,15 +10952,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3562336667388081217, guid: 84eaf08d01c2da44580cb508c8fabeac, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3562336667388081217, guid: 84eaf08d01c2da44580cb508c8fabeac, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3562336667388081217, guid: 84eaf08d01c2da44580cb508c8fabeac, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3562336667388081217, guid: 84eaf08d01c2da44580cb508c8fabeac, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -10981,6 +10981,10 @@ PrefabInstance:
     - target: {fileID: 3562336667388081217, guid: 84eaf08d01c2da44580cb508c8fabeac, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5471057264991539934, guid: 84eaf08d01c2da44580cb508c8fabeac, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4281479730
       objectReference: {fileID: 0}
     - target: {fileID: 9130790812662727526, guid: 84eaf08d01c2da44580cb508c8fabeac, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
