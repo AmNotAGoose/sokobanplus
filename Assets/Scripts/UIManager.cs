@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     public GameObject pauseMenu;
-    public bool canPause = true;
+    public bool canPause = false;
 
     private void Start()
     {
@@ -14,7 +14,7 @@ public class UIManager : MonoBehaviour
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
-        canPause = scene.name == "Menu";
+        canPause = !(scene.name == "Menu");
 
         if (!canPause) pauseMenu.SetActive(false);
     }
