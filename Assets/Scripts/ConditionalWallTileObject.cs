@@ -17,6 +17,8 @@ public class ConditionalWallTile : TileObject
 
         order = 0;
         renderOrder = 50;
+
+        spriteRenderer.color = solidColor;
     }
 
     public override void OnEvaluateFinish()
