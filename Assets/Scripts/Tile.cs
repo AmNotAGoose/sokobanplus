@@ -16,7 +16,7 @@ public class Tile : MonoBehaviour
 
     public bool solid;
     public bool stopper;
-    
+
     public void Initialize()
     {
         transform.localPosition = worldPos;
@@ -40,6 +40,7 @@ public class Tile : MonoBehaviour
     public List<TileObject> PopObjects(HeldObjectsFiltering filter)
     {
         List<TileObject> returnedObjects = new(heldObjects);
+
         switch (filter)
         {
             case HeldObjectsFiltering.Pushable:
@@ -64,7 +65,7 @@ public class Tile : MonoBehaviour
         EvaluateState();
     }
 
-    // this is SO BAD IT LITERALLY LOOPS OVER 10 TIMES PER TILE 
+    // this is SO BAD IT LITERALLY LOOPS OVER 10 TIMES PER TILE
     public void EvaluateCommand(string command)
     {
         if (heldObjects.Count == 0) return;
@@ -77,7 +78,7 @@ public class Tile : MonoBehaviour
         }
 
         foreach (TileObject obj in heldObjects)
-        { 
+        {
             obj.OnCommandFinished(result);
         }
 
