@@ -20,13 +20,16 @@ public abstract class TileObject : MonoBehaviour
     public bool solid;
     public bool pushable;
 
-    public bool moving;
+    private Queue<Vector3> moveQueue = new Queue<Vector3>();
+    private bool isMoving = false;
 
     public void Initialize(List<string> _options)
     {
         options = _options;
         spriteRenderer = GetComponent<SpriteRenderer>();
         transform.localPosition = Vector2.zero;
+        print(parentTile.transform.position);
+        print(transform.position);
         spriteRenderer.sortingOrder = renderOrder;
         AfterInitialize();
         parentTile.EvaluateState();
@@ -36,28 +39,41 @@ public abstract class TileObject : MonoBehaviour
     {
         parentTile = tile;
         gridPos = tile.gridPos;
-        transform.SetParent(tile.transform);
-        LerpToLocalOrigin();
+        transform.SetParent(tile.transform, true);
+
+        moveQueue.Enqueue(tile.transform.TransformPoint(Vector2.zero));
+        if (!isMoving) StartCoroutine(ProcessMoveQueue());
+
         parentTile.EvaluateState();
     }
-    public void LerpToLocalOrigin()
+    IEnumerator ProcessMoveQueue()
     {
-        StartCoroutine(MoveToTarget(new Vector2(0, 0), 0.1f));
+        isMoving = true;
+
+        while (moveQueue.Count > 0)
+        {
+            Vector3 target = moveQueue.Dequeue();
+            yield return StartCoroutine(MoveToTarget(target, 0.6f));
+        }
+
+        isMoving = false;
     }
     IEnumerator MoveToTarget(Vector3 endPos, float duration)
     {
-        Vector3 startPos = transform.localPosition;
+        Vector3 startPos = transform.position;
         float elapsed = 0f;
 
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / duration);
-            transform.localPosition = Vector3.Lerp(startPos, endPos, t);
+            transform.position = Vector3.Lerp(startPos, endPos, t);
             yield return null;
         }
 
-        transform.localPosition = endPos;
+        print("complete");  
+
+        transform.position = endPos;
     }
     public virtual float OnCommand(string command, float prev) { return prev; }
     public virtual void OnCommandFinished(float newValue) { }

@@ -66,7 +66,4 @@ public class Player : TileObject
         yield return new WaitForSeconds(0.5f);
         canMove = true;
     }
-
-    public override float OnCommand(string command, float prev) { return prev; }
-    public override void OnCommandFinished(float newValue) { }
 }

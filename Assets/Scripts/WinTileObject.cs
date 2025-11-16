@@ -32,7 +32,6 @@ public class WinTileObject : TileObject
     public override void OnCommandFinished(float newValue)
     {
         isWon = newValue == targetValue;
-        print(newValue);
         animator.speed = isWon ? 1 : 0;
     }
 }

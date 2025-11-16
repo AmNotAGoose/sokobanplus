@@ -32,7 +32,7 @@ public class Level : MonoBehaviour
     public Color tileColor;
     public ParticleSystem[] winParticlesStart;
     public ParticleSystem[] winParticlesStop;
-    public AudioSource winSound;
+    private AudioManager audioManager;
 
     public Volume volume;
     private LensDistortion lensDistortion;
@@ -43,6 +43,8 @@ public class Level : MonoBehaviour
 
     void Start()
     {
+        audioManager = FindAnyObjectByType<AudioManager>();
+
         GridParser.ParsedGrid parsedGrid = GridParser.ParseGridString(levelString);
         width = parsedGrid.width;
         height = parsedGrid.height;
@@ -134,7 +136,7 @@ public class Level : MonoBehaviour
             particle.Pause();
         }
 
-        winSound.Play();
+        audioManager.PlaySound("sfx:win", false);
 
         yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene(nextLevel);

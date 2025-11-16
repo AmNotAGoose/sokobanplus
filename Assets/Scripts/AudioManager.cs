@@ -25,9 +25,7 @@ public class AudioManager : MonoBehaviour
 {
     public List<AudioClipData> audioClips;
     public GameObject audioSourcePrefab;
-    public GameObject persistentAudioSource;
     
-    public Transform audioParent;
     public Transform persistentAudioParent;
 
     public List<AudioObjectData> curAudioSources = new();
@@ -39,7 +37,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySound(string id, bool persistent, bool loopTime = false)
     {
-        AudioSource audioSource = Instantiate(audioSourcePrefab, persistent ? persistentAudioParent : audioParent).GetComponent<AudioSource>();
+        AudioSource audioSource = Instantiate(audioSourcePrefab, persistent ? persistentAudioParent : null).GetComponent<AudioSource>();
         audioSource.playOnAwake = false;
         audioSource.loop = loopTime;
 
