@@ -1,8 +1,8 @@
 # sokobanplus
-video demo:
-https://youtu.be/OALZvREjDRI
+(new) video demo:
+https://youtu.be/Ig1ghsAwlyM
 
-live demo:
+(new) live demo:
 https://amnotagoose.itch.io/sokoban-hmm
 
 # what is it
@@ -15,7 +15,9 @@ there are 3 types of blocks:
 - wall (black): prevents movement
 - number block (orange): variables/stores data
 - operation block (red): push a number block underneath this and type a command (look below for instructions) to apply it
-- goal block (green): push a number block with the same goal block to satisfy the goal. when all goals have been completed, you win! 
+- goal block (green): push a number block with the same number goal block to satisfy the goal. when all goals have been completed, you win!
+- subgoal block (light green) push a number block with the same number to satisfy the subgoal. some blocks may react to it.
+- conditional wall block (light grey) checks in a 3x3 space around it. all subgoals in that area must be satisfied for it to become permeable, otherwise it is solid.
 
 controls:
 - R: restart level
