@@ -5583,6 +5583,7 @@ MonoBehaviour:
   width: 0
   height: 1
   winConditions: []
+  switchTileSubscribers: []
   gridParent: {fileID: 1957223374}
   tileSpacing: 0
   tilePrefab: {fileID: 8660602319308725020, guid: 16a6caad6d11935429607ef031418746, type: 3}
@@ -5603,10 +5604,9 @@ MonoBehaviour:
   winParticlesStop:
   - {fileID: 1387785120}
   - {fileID: 675204271}
-  winSound: {fileID: 568081394}
   volume: {fileID: 49043932}
   ending: 0
-  nextLevel: 0
+  nextLevel: 6
 --- !u!4 &1005967559
 Transform:
   m_ObjectHideFlags: 0

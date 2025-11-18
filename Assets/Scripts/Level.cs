@@ -20,8 +20,9 @@ public class Level : MonoBehaviour
     public int width;
     public int height;
     public Tile[,] grid;
-    public List<WinTileObject> winConditions;
+    public List<WinTileObject> winConditions = new();
     public Dictionary<int, SwitchTileObject> switchTiles = new();
+    public List<TileObject> switchTileSubscribers = new();
 
     public Transform gridParent;
     public float tileSpacing = 0f;
@@ -154,6 +155,14 @@ public class Level : MonoBehaviour
         isValid = isValid && oneFound;
 
         return isValid;
+    }
+
+    public void NotifySwitchTileSubscribers()
+    {
+        foreach (TileObject subscriber in switchTileSubscribers)
+        {
+            subscriber.OnSwitchTileUpdated();
+        }
     }
 
     public IEnumerator CheckIfWon()

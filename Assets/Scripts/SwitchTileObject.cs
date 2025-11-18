@@ -38,7 +38,14 @@ public class SwitchTileObject : TileObject, ISwitchTileObject
 
     public override void OnCommandFinished(float newValue)
     {
+        bool lastSatisfied = isSatisfied;
+
         isSatisfied = newValue == targetValue;
         animator.speed = isSatisfied ? 1 : 0;
+
+        if ((lastSatisfied != isSatisfied) && isInitialized)
+        {
+            level.NotifySwitchTileSubscribers();
+        }
     }
 }

@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 3840669754812678891, guid: 0953552629a07fb498966ace2c5ccac9, type: 3}
     - target: {fileID: 537272345279182672, guid: 73597093433249e42be8d7b8e5ffacb1, type: 3}
       propertyPath: m_Color.a
-      value: 1
+      value: 0.29803923
       objectReference: {fileID: 0}
     - target: {fileID: 537272345279182672, guid: 73597093433249e42be8d7b8e5ffacb1, type: 3}
       propertyPath: m_Color.b
@@ -82,36 +82,18 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8660602319308725020, guid: 73597093433249e42be8d7b8e5ffacb1, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 833048764758992204}
-    - targetCorrespondingSourceObject: {fileID: 8660602319308725020, guid: 73597093433249e42be8d7b8e5ffacb1, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 7668845581046724768}
   m_SourcePrefab: {fileID: 100100000, guid: 73597093433249e42be8d7b8e5ffacb1, type: 3}
+--- !u!212 &3446535756152529447 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 537272345279182672, guid: 73597093433249e42be8d7b8e5ffacb1, type: 3}
+  m_PrefabInstance: {fileID: 2927419315670406519}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5805399094859189867 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8660602319308725020, guid: 73597093433249e42be8d7b8e5ffacb1, type: 3}
   m_PrefabInstance: {fileID: 2927419315670406519}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &833048764758992204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5805399094859189867}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8c10013fe8f58d4c9bc98c07503efe5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentTile: {fileID: 0}
-  options: []
-  gridPos: {x: 0, y: 0}
-  type: 
-  order: 0
-  renderOrder: 0
-  solid: 0
-  pushable: 0
 --- !u!114 &7668845581046724768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,14 +106,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661472172d253b3478cb131aca20dec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInitialized: 0
   parentTile: {fileID: 0}
   options: []
   gridPos: {x: 0, y: 0}
   type: 
   order: 0
   renderOrder: 0
-  solid: 0
+  solid: 1
   pushable: 0
-  permiableColor: {r: 0, g: 0, b: 0, a: 0}
-  solidColor: {r: 0, g: 0, b: 0, a: 0}
-  spriteRenderer: {fileID: 0}
+  permiableColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 0.4745098}
+  solidColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
+  spriteRenderer: {fileID: 3446535756152529447}

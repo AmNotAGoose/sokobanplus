@@ -8,6 +8,8 @@ public abstract class TileObject : MonoBehaviour
 {
     SpriteRenderer spriteRenderer;
 
+    public bool isInitialized = false;
+
     public Tile parentTile;
 
     public List<string> options;
@@ -31,6 +33,8 @@ public abstract class TileObject : MonoBehaviour
         spriteRenderer.sortingOrder = renderOrder;
         AfterInitialize();
         parentTile.EvaluateState();
+
+        isInitialized = true;
     }
     public abstract void AfterInitialize();
     public void SetNewParentTile(Tile tile)
@@ -75,5 +79,5 @@ public abstract class TileObject : MonoBehaviour
     }
     public virtual float OnCommand(string command, float prev) { return prev; }
     public virtual void OnCommandFinished(float newValue) { }
-    public virtual void OnEvaluateFinish() { }
+    public virtual void OnSwitchTileUpdated() { }
 }

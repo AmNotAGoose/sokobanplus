@@ -99,7 +99,6 @@ public class Tile : MonoBehaviour
         foreach (TileObject obj in heldObjects)
         {
             obj.OnCommandFinished(result);
-            obj.OnEvaluateFinish();
         }
     }
 }

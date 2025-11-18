@@ -5579,7 +5579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c9d3dbea79f74047b4be259e8d69c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelString: 9|5=|player-1,2|numberbox-3,1,0|numberbox-3,3,13|operationbox-5,2,2|win-6,0,52|operationbox-6,1,2|switch-6,3,26,0|wall-7,0|wall-7,1|conditionalwall-7,2|wall-7,3|wall-7,4|win-8,2,16
+  levelString: 14|6=|player-0,2|numberbox-2,2,3|operationbox-3,4,5|numberbox-3,3,7|numberbox-3,2,33|numberbox-3,1,6|operationbox-5,4,5|operationbox-5,3,19|switch-5,2,20,0|switch-5,0,38,1|wall-6,5|wall-6,4|wall-6,3|wall-6,2|conditionalwall-6,1|wall-6,0|operationbox-8,2,31|numberbox-8,3,62|switch-9,3,2,2|switch-9,1,10,3|wall-10,5|wall-10,4|wall-10,3|conditionalwall-10,2|wall-10,1|wall-10,0|win-13,2,93
   width: 0
   height: 1
   winConditions: []
@@ -5609,7 +5609,7 @@ MonoBehaviour:
   - {fileID: 675204271}
   volume: {fileID: 49043932}
   ending: 0
-  nextLevel: 7
+  nextLevel: 0
 --- !u!4 &1005967559
 Transform:
   m_ObjectHideFlags: 0
